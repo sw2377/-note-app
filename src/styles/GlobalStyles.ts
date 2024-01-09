@@ -56,22 +56,47 @@ const GlobalStyles = createGlobalStyle`
 
   /* layout */
   header {
-    border: 1px solid red;
+    height: 40px;
+    text-align: center;
   }
 
   .container {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     
     display: flex;
+    height: calc(100vh - 40px);
 
     & nav {
       background-color: lightblue;
-      width: 20%;
+      flex-grow: 1;
+      min-width: 150px;
+      
     }
 
     .contents {
       display: flex;
-      width: 80%;
+      flex-grow: 9;
+      /* width: 80%; */
+
+      & .notelist {
+        background-color: lightcoral;
+        flex-grow: 1;
+      }
+
+      & .noteItem {
+        background-color: lightgreen;
+        flex-grow: 9;
+      }
+
+      & .no-contents1 {
+        background-color: lightgrey;
+        width: 100%;
+      }
+
+      & .no-contents2 {
+        background-color: lightgray;
+        width: 100%;
+      }
     }
   }
 

@@ -8,11 +8,24 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', 'prettier', '@typescript-eslint'],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
+    'prettier/prettier': [
+      'error',
+      {
+        doubleQuote: true,
+        tabWidth: 2,
+        printWidth: 80,
+        bracketSpacing: true,
+        arrowParens: 'avoid',
+      },
+    ],
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    'prefer-const': 'off',
   },
 }

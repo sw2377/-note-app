@@ -1,8 +1,8 @@
 // import { Outlet } from "react-router-dom";
 
-import Header from "../componenets/common/Header";
-import Sidebar from "../componenets/common/Sidebar";
-import NoteContainer from "../componenets/common/NoteContainer";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import NoteContainer from "./NoteContainer";
 
 const RootLayout = () => {
   return (

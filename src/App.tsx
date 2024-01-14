@@ -2,7 +2,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import GlobalStyles from "./styles/GlobalStyles";
 
 import RootLayout from "./layout/Root";
-import NoteContainer from "./componenets/common/NoteContainer";
+import NoteContainer from "./layout/NoteContainer";
 
 const router = createBrowserRouter([
   {

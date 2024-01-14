@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useStore } from "../../store/notebooks";
+import { useStore } from "../store/notebooks";
 
 import NoContents from "./NoContents";
-import NoteList from "../note/NoteList";
-import Note from "../note/Note";
+import NoteList from "../componenets/note/NoteList";
+import Note from "../componenets/note/Note";
 
 const NoteContainer = () => {
   const { notebooks } = useStore();

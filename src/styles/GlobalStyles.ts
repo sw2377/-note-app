@@ -3,14 +3,17 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
   /* variables */
   :root {
-    --color-blue: #f48225;
+    --color-blue: #0078C5;
     --color-main-black: #404040;
     --color-sub-black: #6A6A6A;
     --color-gray: #A0A0A0;
     --color-white: #fff;
 
-    --color-bg: #F8F8F8;
+    --color-bg: #F4F4F4;
+    /* --color-bg: #F8F8F8; */
     --color-line: #ECECEC;
+
+    --border-radius: 4px;
   }
 
   /* reset */
@@ -26,7 +29,8 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     color: var(--color-black);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Adjusted","Segoe UI","Liberation Sans", sans-serif;
+    /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Adjusted","Segoe UI","Liberation Sans", sans-serif; */
+    font-family: "Noto Sans", sans-serif;
     font-size: 1.6rem;
 
     width: 100%;
@@ -64,6 +68,23 @@ const GlobalStyles = createGlobalStyle`
     font-size: 1.6rem;
   }
 
+  label {
+    display: inline-block;
+  }
+
+  input {
+    display: inline-block;
+    width: 100%;
+    padding: 8px 0;
+    text-indent: 10px;
+    border: none;
+    border-radius: var(--border-radius);
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
   /* layout */
   header {
     height: 40px;
@@ -75,8 +96,6 @@ const GlobalStyles = createGlobalStyle`
     height: calc(100vh - 40px);
 
     & nav {
-      border: 1px solid #ccc;
-      padding: 20px;
       max-width: 200px;
       flex-grow: 2;
     }

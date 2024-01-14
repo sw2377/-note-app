@@ -90,7 +90,8 @@ const value2 = JSON.stringify({
 
 interface StoreType {
   notebooks: NotebookType[];
-  // createNotebook
+  createNotebook: (name: string) => void;
+  removeNotebook: (targetId: number) => void;
   // createNote
   // removeNote
   // saveNote
@@ -144,13 +145,19 @@ export const useStore = create<StoreType>()(
       createNotebook: name =>
         set(prev => ({
           notebooks: [
-            ...prev.notebooks,
             {
-              id: new Date().getMilliseconds(),
+              id: Date.now(),
               name,
               notelist: [],
             },
+            ...prev.notebooks,
           ],
+        })),
+      removeNotebook: targetId =>
+        set(prev => ({
+          notebooks: prev.notebooks.filter(
+            notebook => notebook.id !== targetId,
+          ),
         })),
       createNote: (notebookName, id, title, content, date) =>
         set(prev => {

@@ -13,7 +13,7 @@ const Sidebar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const selectedNotebook = notebooks.find(each => each.name === notebook);
-  console.log(selectedNotebook);
+  // console.log(selectedNotebook);
 
   const openCreateNotebookModal = () => {
     setIsModalOpen(true);
@@ -36,7 +36,7 @@ const Sidebar = () => {
         </TitleArea>
         <NoteBookList>
           {notebooks.map(notebook => (
-            <NoteBookLIstItem
+            <NoteBookListItem
               key={notebook.id}
               className={
                 selectedNotebook && selectedNotebook.name === notebook.name
@@ -52,7 +52,7 @@ const Sidebar = () => {
               >
                 X
               </RemoveNotebookBtn>
-            </NoteBookLIstItem>
+            </NoteBookListItem>
           ))}
         </NoteBookList>
       </Area>
@@ -81,7 +81,7 @@ const TitleArea = styled.div`
   padding: 10px 20px;
 `;
 
-const Title = styled.h2`
+const Title = styled.div`
   color: var(--color-blue);
 `;
 
@@ -93,7 +93,7 @@ const NoteBookList = styled.ul`
   /* margin-top: 8px; */
 `;
 
-const NoteBookLIstItem = styled.li`
+const NoteBookListItem = styled.li`
   display: flex;
   justify-content: space-between;
   /* padding: 8px 20px; */

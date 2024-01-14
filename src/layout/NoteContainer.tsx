@@ -25,7 +25,7 @@ const NoteContainer = () => {
   };
 
   return (
-    <div className="note_container">
+    <div className="note-container">
       {/* 노트북에 노트가 없으면 no-contents / 노트가 있으면 notelist 출력 */}
       {notebook && !notelist.length ? (
         <NoContents

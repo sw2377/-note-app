@@ -4,6 +4,7 @@ const GlobalStyles = createGlobalStyle`
   /* variables */
   :root {
     --color-blue: #0078C5;
+    --color-lightblue: #E4F2FE;
     --color-main-black: #404040;
     --color-sub-black: #6A6A6A;
     --color-gray: #A0A0A0;
@@ -85,6 +86,10 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  span {
+    display: inline-block;
+  }
+
   /* layout */
   .container {
     display: flex;
@@ -95,7 +100,7 @@ const GlobalStyles = createGlobalStyle`
       flex-grow: 2;
     }
 
-    .note_container {
+    .note-container {
       border: 1px solid gray;
       display: flex;
       flex-grow: 9;
@@ -111,24 +116,12 @@ const GlobalStyles = createGlobalStyle`
         align-items: center;
       }
 
-      & .note-list {
-        border: 1px solid #ccc;
-        /* display: flex; */
-        /* padding: 20px; */
-        max-width: 250px;
-        flex-grow: 2;
-        overflow-y: auto;
-
-        & ul > li { border-bottom: 1px solid gray }
-      }
-
       & .note-item {
         border: 1px solid #ccc;
         padding: 20px;
         flex-grow: 8;
       }
     }
-  }
 `;
 
 export default GlobalStyles;

@@ -93,7 +93,7 @@ interface StoreType {
   createNotebook: (name: string) => void;
   removeNotebook: (targetId: number) => void;
   createNote: (notebookName: string, note: NoteType) => void;
-  // removeNote
+  removeNote: (targetId: number) => void;
   // saveNote
 }
 
@@ -179,12 +179,12 @@ export const useStore = create<StoreType>()(
             notebooks: updatedNotebooks,
           };
         }),
-      removeNote: noteId =>
+      removeNote: targetId =>
         set(prev => {
           const updatedNotebooks = prev.notebooks.map(notebook => {
             return {
               ...notebook,
-              notelist: notebook.notelist.filter(note => note.id !== noteId),
+              notelist: notebook.notelist.filter(note => note.id !== targetId),
             };
           });
 

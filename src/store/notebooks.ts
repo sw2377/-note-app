@@ -94,7 +94,7 @@ interface StoreType {
   removeNotebook: (targetId: number) => void;
   createNote: (notebookName: string, note: NoteType) => void;
   removeNote: (targetId: number) => void;
-  // saveNote
+  saveNote: (targetId: number, title: string, content: string) => void;
 }
 
 export const useStore = create<StoreType>()(
@@ -192,13 +192,13 @@ export const useStore = create<StoreType>()(
             notebooks: updatedNotebooks,
           };
         }),
-      saveNote: (noteId, title, content) =>
+      saveNote: (targetId, title, content) =>
         set(prev => {
           const updatedNotebooks = prev.notebooks.map(notebook => {
             return {
               ...notebook,
               notelist: notebook.notelist.map(note => {
-                if (note.id === noteId) {
+                if (note.id === targetId) {
                   return {
                     ...note,
                     title,

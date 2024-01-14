@@ -101,7 +101,6 @@ const GlobalStyles = createGlobalStyle`
     }
 
     .note-container {
-      border: 1px solid gray;
       display: flex;
       flex-grow: 9;
       /* width: 80%; */
@@ -115,13 +114,8 @@ const GlobalStyles = createGlobalStyle`
         justify-content: center;
         align-items: center;
       }
-
-      & .note-item {
-        border: 1px solid #ccc;
-        padding: 20px;
-        flex-grow: 8;
-      }
     }
+  }
 `;
 
 export default GlobalStyles;

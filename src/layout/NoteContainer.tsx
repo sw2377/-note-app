@@ -4,7 +4,7 @@ import { useStore } from "../store/notebooks";
 
 import NoContents from "./NoContents";
 import NoteList from "../componenets/note/NoteList";
-import Note from "../componenets/note/Note";
+import NoteEditor from "../componenets/note/lexicalEditor/Editor";
 
 const NoteContainer = () => {
   const { notebooks } = useStore();
@@ -36,9 +36,8 @@ const NoteContainer = () => {
       ) : (
         <>
           <NoteList notelist={notelist} />
-          {selectedNote() && <Note note={selectedNote()} />}
-          {/* <NoteList /> */}
-          {/* <Note /> */}
+          {/* {selectedNote() && <Note note={selectedNote()} />} */}
+          {selectedNote() && <NoteEditor note={selectedNote()} />}
         </>
       )}
     </div>

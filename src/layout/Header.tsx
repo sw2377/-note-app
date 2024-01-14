@@ -15,7 +15,7 @@ const Header = () => {
         root: {
           children: [
             {
-              children: [{ type: "linebreak", version: 1 }],
+              children: [],
               direction: null,
               format: "",
               indent: 0,

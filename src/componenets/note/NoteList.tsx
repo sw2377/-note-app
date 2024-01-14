@@ -8,7 +8,7 @@ const NoteList = ({ notelist }: { notelist: NoteType[] }) => {
   const { notebook, id } = useParams();
   const navigate = useNavigate();
 
-  const selectedNote = notelist.find(each => each.id.toString() === id);
+  const selectedNote = notelist?.find(each => each.id.toString() === id);
   // console.log("selectedNote", selectedNote);
 
   // 선택한 notebook의 notelist

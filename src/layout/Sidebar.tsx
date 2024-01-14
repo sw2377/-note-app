@@ -68,7 +68,7 @@ const Sidebar = () => {
 };
 
 const SidebarWrapper = styled.nav`
-  border: 1px solid #ccc;
+  border-right: 1px solid var(--color-line);
 `;
 
 const Area = styled.div`

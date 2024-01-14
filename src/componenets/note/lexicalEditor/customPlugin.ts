@@ -1,7 +1,14 @@
 import { useEffect } from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { EditorState } from "lexical";
+import { NoteType } from "../../../type/notebookTypes";
 
-export const OnChangePlugin = ({ onChange, note }) => {
+// OnChangePlugin : editor가 change 될 떄마다 실행
+export const OnChangePlugin = ({
+  onChange,
+}: {
+  onChange: (editorState: EditorState) => void;
+}) => {
   const [editor] = useLexicalComposerContext();
 
   useEffect(() => {
@@ -9,17 +16,19 @@ export const OnChangePlugin = ({ onChange, note }) => {
       onChange(editorState);
     });
   }, [editor, onChange]);
+
+  return null;
 };
 
-// InitPlugin은 note가 변경될 때만 실행됨
-export const InitPlugin = ({ note }) => {
+// InitPlugin : note에 첫 진입시 초기값 세팅
+export const InitPlugin = ({ note }: { note: NoteType }) => {
   const [editor] = useLexicalComposerContext();
+  editor.focus();
 
   useEffect(() => {
-    console.log("INIT INIT INIT INIT");
     const editorState = editor.parseEditorState(note.content);
     editor.setEditorState(editorState);
   }, [note, editor]);
 
-  // return null; // InitPlugin 자체는 렌더링에서 제외
+  return null;
 };

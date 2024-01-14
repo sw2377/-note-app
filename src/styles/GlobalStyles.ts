@@ -7,6 +7,7 @@ const GlobalStyles = createGlobalStyle`
     --color-main-black: #404040;
     --color-sub-black: #6A6A6A;
     --color-gray: #A0A0A0;
+    --color-white: #fff;
 
     --color-bg: #F8F8F8;
     --color-line: #ECECEC;
@@ -50,8 +51,17 @@ const GlobalStyles = createGlobalStyle`
 
   a {
     display:inline-block;
+    width:100%;
+    height:100%;
     text-decoration: none;
     color: inherit;
+  }
+
+  button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.6rem;
   }
 
   /* layout */
@@ -61,46 +71,50 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .container {
-    /* border: 1px solid blue; */
-    
     display: flex;
     height: calc(100vh - 40px);
 
     & nav {
-      background-color: lightblue;
-      flex-grow: 1;
-      min-width: 150px;
-      
+      border: 1px solid #ccc;
+      padding: 20px;
+      max-width: 200px;
+      flex-grow: 2;
     }
 
-    .contents {
+    .note_container {
+      border: 1px solid gray;
       display: flex;
       flex-grow: 9;
       /* width: 80%; */
 
-      & .notelist {
-        background-color: lightcoral;
-        flex-grow: 1;
-      }
-
-      & .noteItem {
-        background-color: lightgreen;
-        flex-grow: 9;
-      }
-
-      & .no-contents1 {
-        background-color: lightgrey;
+      & .no-contents {
         width: 100%;
+        height: 100%;
+        background-color: ivory;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
 
-      & .no-contents2 {
-        background-color: lightgray;
-        width: 100%;
+      & .note-list {
+        border: 1px solid #ccc;
+        /* display: flex; */
+        /* padding: 20px; */
+        max-width: 250px;
+        flex-grow: 2;
+        overflow-y: auto;
+
+        & ul > li { border-bottom: 1px solid gray }
+      }
+
+      & .note-item {
+        border: 1px solid #ccc;
+        padding: 20px;
+        flex-grow: 8;
       }
     }
   }
-
-
 `;
 
 export default GlobalStyles;

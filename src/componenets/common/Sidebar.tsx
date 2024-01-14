@@ -1,11 +1,22 @@
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useStore } from "../../store/notebooks";
+
 const Sidebar = () => {
+  const { notebooks } = useStore();
+
+  // const navigate = useNavigate();
+
   return (
     <nav>
-      {/* ul li로 변경하기 */}
-      <div>NOTEBOOS</div>
+      <div>NOTEBOOKS</div>
       <ul>
-        <li>노트북1</li>
-        <li>노트북2</li>
+        {notebooks.map(notebook => (
+          <li key={notebook.id}>
+            <Link to={notebook.name}>{notebook.name}</Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );

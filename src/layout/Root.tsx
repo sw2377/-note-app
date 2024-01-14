@@ -2,7 +2,7 @@
 
 import Header from "../componenets/common/Header";
 import Sidebar from "../componenets/common/Sidebar";
-import Contents from "../componenets/common/Contents";
+import NoteContainer from "../componenets/common/NoteContainer";
 
 const RootLayout = () => {
   return (
@@ -10,7 +10,7 @@ const RootLayout = () => {
       <Header />
       <div className="container">
         <Sidebar />
-        <Contents />
+        <NoteContainer />
       </div>
     </>
   );

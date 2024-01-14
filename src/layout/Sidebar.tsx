@@ -19,7 +19,7 @@ const Sidebar = () => {
     setIsModalOpen(true);
   };
 
-  const removeNotebookHandler = (targetId: number) => {
+  const handleRemoveNotebook = (targetId: number) => {
     console.log(targetId);
     removeNotebook(targetId);
     navigate("/");
@@ -47,7 +47,7 @@ const Sidebar = () => {
               <Link to={notebook.name}>{notebook.name}</Link>
               <RemoveNotebookBtn
                 onClick={() => {
-                  removeNotebookHandler(notebook.id);
+                  handleRemoveNotebook(notebook.id);
                 }}
               >
                 X

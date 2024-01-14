@@ -26,7 +26,7 @@ const ActionButton = ({
 };
 
 const Button = styled.button`
-  padding: 6px 20px;
+  padding: 8px 20px;
   border-radius: var(--border-radius);
   font-size: 1.4rem;
 

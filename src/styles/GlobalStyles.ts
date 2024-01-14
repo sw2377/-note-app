@@ -86,11 +86,6 @@ const GlobalStyles = createGlobalStyle`
   }
 
   /* layout */
-  header {
-    height: 40px;
-    text-align: center;
-  }
-
   .container {
     display: flex;
     height: calc(100vh - 40px);

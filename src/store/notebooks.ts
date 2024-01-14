@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { NotebookType } from "../type/notebookTypes";
+import { NoteType, NotebookType } from "../type/notebookTypes";
 
 // notebooks -> create, remove
 // note -> create, remove, save
@@ -92,7 +92,7 @@ interface StoreType {
   notebooks: NotebookType[];
   createNotebook: (name: string) => void;
   removeNotebook: (targetId: number) => void;
-  // createNote
+  createNote: (notebookName: string, note: NoteType) => void;
   // removeNote
   // saveNote
 }
@@ -159,21 +159,16 @@ export const useStore = create<StoreType>()(
             notebook => notebook.id !== targetId,
           ),
         })),
-      createNote: (notebookName, id, title, content, date) =>
+      createNote: (notebookName, note) =>
         set(prev => {
+          const newNote = {
+            ...note,
+          };
           const updatedNotebooks = prev.notebooks.map(notebook => {
             if (notebook.name === notebookName) {
               return {
                 ...notebook,
-                notelist: [
-                  {
-                    id,
-                    title,
-                    content,
-                    date,
-                  },
-                  ...notebook.notelist,
-                ],
+                notelist: [newNote, ...notebook.notelist],
               };
             }
 

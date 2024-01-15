@@ -19,7 +19,7 @@ module.exports = {
       {
         doubleQuote: true,
         tabWidth: 2,
-        printWidth: 80,
+        printWidth: 100,
         bracketSpacing: true,
         arrowParens: 'avoid',
       },

@@ -8,18 +8,9 @@ interface ButtonProps {
   children: ReactNode;
 }
 
-const ActionButton = ({
-  type = "button",
-  active = true,
-  handleClick,
-  children,
-}: ButtonProps) => {
+const ActionButton = ({ type = "button", active = true, handleClick, children }: ButtonProps) => {
   return (
-    <Button
-      type={type}
-      className={active ? "active" : ""}
-      onClick={handleClick}
-    >
+    <Button type={type} className={active ? "active" : ""} onClick={handleClick}>
       {children}
     </Button>
   );

@@ -1,20 +1,36 @@
-import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 interface NoContentsProps {
+  title: string;
   text: string;
-  link: string;
-  linkTo: string; // 타입이 이게 맞나..?
+  handleClick: () => void;
 }
 
-const NoContents = ({ text, link, linkTo }: NoContentsProps) => {
+const NoContents = ({ title, text, handleClick }: NoContentsProps) => {
   return (
-    <div className="no-contents">
-      <p>{text}</p>
-      <p>
-        <Link to={linkTo}>{link}</Link>
-      </p>
-    </div>
+    <NoContentsWrapper>
+      <Text>{text}</Text>
+      <Button onClick={handleClick}>{title}</Button>
+    </NoContentsWrapper>
   );
 };
+
+const NoContentsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
+const Text = styled.p`
+  margin: 12px 0;
+  color: var(--color-gray);
+`;
+
+const Button = styled.button`
+  color: var(--color-blue);
+`;
 
 export default NoContents;

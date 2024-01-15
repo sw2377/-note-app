@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useStore } from "../../../store/notebooks";
-import styled from "styled-components";
 import { NoteType } from "../../../type/notebookTypes";
 import { OnChangePlugin, InitPlugin } from "./customPlugin";
+import styled from "styled-components";
 
 import { EditorState } from "lexical";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
@@ -15,12 +15,13 @@ const Editor = ({ note }: { note: NoteType }) => {
   const { saveNote } = useStore();
 
   const [editorState, setEditorState] = useState(""); // JSON 형태로 저장된 editorState(현재 에디터의 글)
-  const [titleNode, setTitleNode] = useState("");
+  const [titleNode, setTitleNode] = useState<string | null>();
   const [isModified, setIsModified] = useState(false);
 
   const onChange = (editorState: EditorState) => {
     setIsModified(false);
 
+    // console.log("editorState", editorState);
     // _EditorState(editor의 contents)를 editorState에 JSON 형태로 저장
     const editorStateJSON = editorState.toJSON();
     setEditorState(JSON.stringify(editorStateJSON));
@@ -34,15 +35,9 @@ const Editor = ({ note }: { note: NoteType }) => {
   };
 
   const onSave = () => {
-    saveNote(note.id, titleNode, editorState);
-  };
-
-  const initialConfig = {
-    namespace: "MyNoteEditor",
-    theme: { paragraph: "editor-paragraph" },
-    onError(error: Error) {
-      console.log(error);
-    },
+    if (note.id && titleNode && editorState) {
+      saveNote(note.id, titleNode, editorState);
+    }
   };
 
   // editor에 사용자의 입력이 멈추고 3초 후 isModified를 true로 설정
@@ -56,13 +51,21 @@ const Editor = ({ note }: { note: NoteType }) => {
 
   // isModified가 true가 되면 auto save
   useEffect(() => {
-    if (isModified) {
+    if (isModified && titleNode !== "" && editorState !== "") {
       onSave();
     }
   }, [isModified]);
 
+  const initialConfig = {
+    namespace: "MyNoteEditor",
+    theme: { paragraph: "editor-paragraph" },
+    onError(error: Error) {
+      console.log(error);
+    },
+  };
+
   return (
-    <EditorWrapper>
+    <EditorWrapper className="note-item">
       <LexicalComposer initialConfig={initialConfig}>
         <PlainTextPlugin
           contentEditable={<ContentEditable className="contentEditable" />}
@@ -70,18 +73,17 @@ const Editor = ({ note }: { note: NoteType }) => {
           ErrorBoundary={LexicalErrorBoundary}
         />
         <HistoryPlugin />
-        <InitPlugin note={note} />
         <OnChangePlugin onChange={onChange} />
+        <InitPlugin note={note} />
       </LexicalComposer>
     </EditorWrapper>
   );
 };
 
 const EditorWrapper = styled.div`
+  overflow-y: auto;
   position: relative;
-  max-width: 1200px;
   padding: 12px 20px;
-  flex-grow: 8;
 
   & .contentEditable {
     width: 100%;
@@ -89,8 +91,6 @@ const EditorWrapper = styled.div`
     outline: none;
 
     & .editor-paragraph {
-      /* color: grey; */
-
       & > span:nth-of-type(1) {
         display: inline-block;
         padding: 16px 0;

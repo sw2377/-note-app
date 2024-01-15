@@ -4,50 +4,45 @@ import { NoteType } from "../../type/notebookTypes";
 import { useStore } from "../../store/notebooks";
 
 const NoteList = ({ notelist }: { notelist: NoteType[] }) => {
+  // console.log("notelist", notelist);
   const { removeNote } = useStore();
   const { notebook, id } = useParams();
   const navigate = useNavigate();
 
   const selectedNote = notelist?.find(each => each.id.toString() === id);
 
-  const handleRemoveNote = (targetId: number) => {
-    removeNote(targetId);
-    navigate(`/${notebook}`); // 이거 왜 작동안하는겨,,,
+  const handleRemoveNote = async (targetId: number) => {
+    if (window.confirm("노트를 삭제하시겠습니까?")) {
+      await removeNote(targetId);
+      navigate(`/${notebook}`);
+    }
   };
 
   return (
-    <NoteListWrapper>
+    <NoteListWrapper className="note-list">
       <NoteBookTitle>{notebook}</NoteBookTitle>
       <NoteListOfSelectedNoteBook>
         {notelist?.map(note => {
           const parsedEditorState = JSON.parse(note.content);
-          const textNode = parsedEditorState.root?.children[0].children.filter(
-            node => node.type === "text",
+          const textNode: string = parsedEditorState.root?.children[0].children.filter(
+            (node: any) => node.type === "text",
           )[1]?.text;
-
-          console.log("textNode", textNode);
           return (
             <NoteListItem
               key={note.id}
-              className={
-                selectedNote && selectedNote.id === note.id ? "selected" : ""
-              }
+              className={selectedNote && selectedNote.id === note.id ? "selected" : ""}
             >
               <StyledLink to={`/${notebook}/${note.id}`}>
                 <NoteListItemWrapper>
-                  <NoteListItemTitle>
-                    {note.title ?? "New Note"}
-                  </NoteListItemTitle>
-                  <NoteListItemContent>
-                    {textNode ?? "No additional text"}
-                  </NoteListItemContent>
+                  <NoteListItemTitle>{note.title ?? "New Note"}</NoteListItemTitle>
+                  <NoteListItemContent>{textNode ?? "No additional text"}</NoteListItemContent>
                   <NoteListItemDate>{note.date}</NoteListItemDate>
                   <RemoveNoteBtn
                     onClick={() => {
                       handleRemoveNote(note.id);
                     }}
                   >
-                    X
+                    ×
                   </RemoveNoteBtn>
                 </NoteListItemWrapper>
               </StyledLink>
@@ -60,13 +55,15 @@ const NoteList = ({ notelist }: { notelist: NoteType[] }) => {
 };
 
 const NoteListWrapper = styled.div`
-  max-width: 280px;
   overflow-y: auto;
-  flex-grow: 2;
+  border: 1px solid var(--color-line);
 `;
 
 const NoteBookTitle = styled.h2`
-  padding: 12px 16px;
+  z-index: 10;
+  position: sticky;
+  top: 0;
+  padding: 8px 16px;
   background-color: var(--color-bg);
 `;
 
@@ -129,6 +126,7 @@ const RemoveNoteBtn = styled.button`
   position: absolute;
   right: 0;
   top: 0;
+  padding: 4px;
 `;
 
 export default NoteList;

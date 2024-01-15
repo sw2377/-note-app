@@ -91,30 +91,32 @@ const GlobalStyles = createGlobalStyle`
   }
 
   /* layout */
+  .sidebar {
+    min-width: 200px;
+    max-width: 250px;
+    flex-grow: 2;
+  }
+
   .container {
     display: flex;
-    height: calc(100vh - 40px);
+    width: 100%;
+    height: calc(100vh - 49px);
+  }
 
-    & nav {
-      max-width: 200px;
-      flex-grow: 2;
-    }
+  .note-container {
+    display: flex;
+    width: 100%;
+  }
 
-    .note-container {
-      display: flex;
-      flex-grow: 9;
-      /* width: 80%; */
+  .note-list {
+    min-width: 250px;
+    max-width: 280px;
+    flex-grow: 2;
+  }
 
-      & .no-contents {
-        width: 100%;
-        height: 100%;
-        background-color: ivory;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-    }
+  .note-item {
+    /* max-width: 1200px; */
+    flex-grow: 8;
   }
 `;
 

@@ -1,3 +1,4 @@
+// external library
 import { LexicalNode as OriginalLexicalNode } from "lexical";
 
 declare module "lexical" {

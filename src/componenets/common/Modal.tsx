@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useStore } from "../../store/notebooks";
@@ -19,6 +19,18 @@ const Modal = ({ isOpen, onClose, modalTitle }: ModalProps) => {
   const [notebookName, setNotebookName] = useState("");
   const [isActiveButton, setIsActiveButton] = useState(false);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
@@ -30,9 +42,7 @@ const Modal = ({ isOpen, onClose, modalTitle }: ModalProps) => {
     e.preventDefault();
 
     if (notebookName.trim().length > 0) {
-      const isDuplicateName = notebooks.some(
-        notebook => notebook.name === notebookName.trim(),
-      );
+      const isDuplicateName = notebooks.some(notebook => notebook.name === notebookName.trim());
 
       if (isDuplicateName) {
         window.alert(
@@ -77,6 +87,7 @@ const Modal = ({ isOpen, onClose, modalTitle }: ModalProps) => {
 };
 
 const ModalOverlay = styled.div`
+  z-index: 100;
   position: fixed;
   top: 0;
   left: 0;

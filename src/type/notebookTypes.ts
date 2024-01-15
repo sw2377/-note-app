@@ -2,7 +2,7 @@ export interface NoteType {
   id: number;
   title: string;
   content: string;
-  date: Date | string;
+  date: string;
 }
 
 export interface NotebookType {

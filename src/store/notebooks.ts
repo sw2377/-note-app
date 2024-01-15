@@ -3,91 +3,6 @@ import { persist } from "zustand/middleware";
 
 import { NoteType, NotebookType } from "../type/notebookTypes";
 
-// notebooks -> create, remove
-// note -> create, remove, save
-
-const value = JSON.stringify({
-  root: {
-    children: [
-      {
-        children: [
-          {
-            detail: 0,
-            format: 0,
-            mode: "normal",
-            style: "",
-            text: "안녕하세요. 이 부분은 제목입니다.",
-            type: "text",
-            version: 1,
-          },
-          { type: "linebreak", version: 1 },
-          { type: "linebreak", version: 1 },
-          {
-            detail: 0,
-            format: 0,
-            mode: "normal",
-            style: "",
-            text: "이 부분은 내용입니다.",
-            type: "text",
-            version: 1,
-          },
-        ],
-        direction: "ltr",
-        format: "",
-        indent: 0,
-        type: "paragraph",
-        version: 1,
-      },
-    ],
-    direction: "ltr",
-    format: "",
-    indent: 0,
-    type: "root",
-    version: 1,
-  },
-});
-
-const value2 = JSON.stringify({
-  root: {
-    children: [
-      {
-        children: [
-          {
-            detail: 0,
-            format: 0,
-            mode: "normal",
-            style: "",
-            text: "안녕하세요. 이 부분은 제목입니다.",
-            type: "text",
-            version: 1,
-          },
-          { type: "linebreak", version: 1 },
-          { type: "linebreak", version: 1 },
-          {
-            detail: 0,
-            format: 0,
-            mode: "normal",
-            style: "",
-            text: "22222이 부분은 내용입니다.",
-            type: "text",
-            version: 1,
-          },
-        ],
-        direction: "ltr",
-        format: "",
-        indent: 0,
-        type: "paragraph",
-        version: 1,
-      },
-    ],
-    direction: "ltr",
-    format: "",
-    indent: 0,
-    type: "root",
-    version: 1,
-  },
-});
-
 interface StoreType {
   notebooks: NotebookType[];
   createNotebook: (name: string) => void;
@@ -100,47 +15,6 @@ interface StoreType {
 export const useStore = create<StoreType>()(
   persist(
     set => ({
-      // notebooks: [
-      //   {
-      //     id: 1,
-      //     name: "notebook1",
-      //     // cover: "lightblue",
-      //     notelist: [
-      //       { id: 11, title: "new note1", content: value, date: new Date() },
-      //     ],
-      //   },
-      //   {
-      //     id: 2,
-      //     name: "notebook2",
-      //     // cover: "lightcoral",
-      //     notelist: [
-      //       {
-      //         id: 21,
-      //         title: "첫번째노트타이틀",
-      //         content: value,
-      //         date: new Date(),
-      //       },
-      //       {
-      //         id: 31,
-      //         title: "두번째노트타이틀입니다.",
-      //         content: value2,
-      //         date: new Date(),
-      //       },
-      //       {
-      //         id: 41,
-      //         title: "세번째 노트타이틀입니다아아아아아",
-      //         content: value,
-      //         date: new Date(),
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     id: 3,
-      //     name: "notebook3",
-      //     // cover: "lightgreen",
-      //     notelist: [],
-      //   },
-      // ],
       notebooks: [],
       createNotebook: name =>
         set(prev => ({
@@ -155,9 +29,7 @@ export const useStore = create<StoreType>()(
         })),
       removeNotebook: targetId =>
         set(prev => ({
-          notebooks: prev.notebooks.filter(
-            notebook => notebook.id !== targetId,
-          ),
+          notebooks: prev.notebooks.filter(notebook => notebook.id !== targetId),
         })),
       createNote: (notebookName, note) =>
         set(prev => {
@@ -216,7 +88,7 @@ export const useStore = create<StoreType>()(
         }),
     }),
     {
-      name: "NOTE_APP_STORAGE",
+      name: "NOTE_APP_STORAGE_SW",
     },
   ),
 );

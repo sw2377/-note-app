@@ -1,57 +1,41 @@
 import { useParams, useNavigate } from "react-router-dom";
+import useCreateNote from "../hooks/useCreateNote";
 import styled from "styled-components";
-import { useStore } from "../store/notebooks";
-
 import ActionButton from "../componenets/common/ActionButton";
 
 const Header = () => {
-  const { createNote } = useStore();
   const navigate = useNavigate();
   const { notebook } = useParams();
 
-  const handleCreateNote = () => {
+  const { handleCreateNote } = useCreateNote();
+
+  const handleCreateNoteClick = () => {
     if (notebook) {
-      const initialContent = JSON.stringify({
-        root: {
-          children: [
-            {
-              children: [],
-              direction: null,
-              format: "",
-              indent: 0,
-              type: "paragraph",
-              version: 1,
-            },
-          ],
-          direction: null,
-          format: "",
-          indent: 0,
-          type: "root",
-          version: 1,
-        },
-      });
-
-      const note = {
-        id: Date.now(),
-        title: "New Note",
-        content: initialContent,
-        date: new Date().toLocaleString(),
-      };
-      createNote(notebook, note);
-
-      navigate(`${notebook}/${note.id}`);
+      const createdNoteId = handleCreateNote(notebook);
+      navigate(`${notebook}/${createdNoteId}`);
+    } else {
+      window.alert("Create a Notebook first, please.");
     }
   };
 
   return (
     <HeaderWrapper>
-      <ActionButton handleClick={handleCreateNote}>New Note</ActionButton>
+      <ButtonArea>
+        <ActionButton handleClick={handleCreateNoteClick}>New Note</ActionButton>
+      </ButtonArea>
     </HeaderWrapper>
   );
 };
 
 const HeaderWrapper = styled.header`
-  height: 40px;
+  /* height: 40px; */
+  width: 100%;
+  padding: 8px;
+  border-bottom: 1px solid var(--color-line);
+`;
+
+const ButtonArea = styled.div`
+  text-align: right;
 `;
 
 export default Header;

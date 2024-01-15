@@ -9,12 +9,6 @@ const NoteList = ({ notelist }: { notelist: NoteType[] }) => {
   const navigate = useNavigate();
 
   const selectedNote = notelist?.find(each => each.id.toString() === id);
-  // console.log("selectedNote", selectedNote);
-
-  // 선택한 notebook의 notelist
-  // const notelist: NoteType[] = notebooks.filter(
-  //   each => each.name === notebook,
-  // )[0].notelist;
 
   const handleRemoveNote = (targetId: number) => {
     removeNote(targetId);
@@ -31,7 +25,7 @@ const NoteList = ({ notelist }: { notelist: NoteType[] }) => {
             node => node.type === "text",
           )[1]?.text;
 
-          // console.log("textNode", textNode);
+          console.log("textNode", textNode);
           return (
             <NoteListItem
               key={note.id}

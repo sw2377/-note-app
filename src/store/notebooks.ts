@@ -100,48 +100,48 @@ interface StoreType {
 export const useStore = create<StoreType>()(
   persist(
     set => ({
-      notebooks: [
-        {
-          id: 1,
-          name: "notebook1",
-          // cover: "lightblue",
-          notelist: [
-            { id: 11, title: "new note1", content: value, date: new Date() },
-          ],
-        },
-        {
-          id: 2,
-          name: "notebook2",
-          // cover: "lightcoral",
-          notelist: [
-            {
-              id: 21,
-              title: "첫번째노트타이틀",
-              content: value,
-              date: new Date(),
-            },
-            {
-              id: 31,
-              title: "두번째노트타이틀입니다.",
-              content: value2,
-              date: new Date(),
-            },
-            {
-              id: 41,
-              title: "세번째 노트타이틀입니다아아아아아",
-              content: value,
-              date: new Date(),
-            },
-          ],
-        },
-        {
-          id: 3,
-          name: "notebook3",
-          // cover: "lightgreen",
-          notelist: [],
-        },
-      ],
-      // notebooks: [],
+      // notebooks: [
+      //   {
+      //     id: 1,
+      //     name: "notebook1",
+      //     // cover: "lightblue",
+      //     notelist: [
+      //       { id: 11, title: "new note1", content: value, date: new Date() },
+      //     ],
+      //   },
+      //   {
+      //     id: 2,
+      //     name: "notebook2",
+      //     // cover: "lightcoral",
+      //     notelist: [
+      //       {
+      //         id: 21,
+      //         title: "첫번째노트타이틀",
+      //         content: value,
+      //         date: new Date(),
+      //       },
+      //       {
+      //         id: 31,
+      //         title: "두번째노트타이틀입니다.",
+      //         content: value2,
+      //         date: new Date(),
+      //       },
+      //       {
+      //         id: 41,
+      //         title: "세번째 노트타이틀입니다아아아아아",
+      //         content: value,
+      //         date: new Date(),
+      //       },
+      //     ],
+      //   },
+      //   {
+      //     id: 3,
+      //     name: "notebook3",
+      //     // cover: "lightgreen",
+      //     notelist: [],
+      //   },
+      // ],
+      notebooks: [],
       createNotebook: name =>
         set(prev => ({
           notebooks: [

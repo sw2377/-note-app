@@ -14,23 +14,13 @@ import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 const Editor = ({ note }: { note: NoteType }) => {
   const { saveNote } = useStore();
 
-  const [editorState, setEditorState] = useState(""); // JSON 형태로 저장된 editorState(현재 에디터의 글)이
+  const [editorState, setEditorState] = useState(""); // JSON 형태로 저장된 editorState(현재 에디터의 글)
   const [titleNode, setTitleNode] = useState("");
+  const [isModified, setIsModified] = useState(false);
 
-  // const [isContentModified, setIsContentModified] = useState(false);
-  // const [autoSaveTimer, setAutoSaveTimer] = useState(null);
+  const onChange = (editorState: EditorState) => {
+    setIsModified(false);
 
-  // useEffect(() => {
-  //   const autoSaveInterval = setInterval(() => {
-  //     saveNote(note.id, titleNode, editorState);
-  //     console.log("Auto-save:", titleNode, editorState);
-  //     // setIsContentModified(false);
-  //   }, 3000);
-
-  //   return () => clearInterval(autoSaveInterval);
-  // }, [note.id, titleNode, editorState, saveNote]);
-
-  function onChange(editorState: EditorState) {
     // _EditorState(editor의 contents)를 editorState에 JSON 형태로 저장
     const editorStateJSON = editorState.toJSON();
     setEditorState(JSON.stringify(editorStateJSON));
@@ -39,36 +29,13 @@ const Editor = ({ note }: { note: NoteType }) => {
     const textNodes = Array.from(editorState._nodeMap.values()).filter(
       node => node.__type === "text",
     );
-    const titleNode: string = textNodes[0]?.__text ?? null;
+    const titleNode = textNodes[0]?.__text ?? null;
     setTitleNode(titleNode);
+  };
 
-    // const newTitleNode = textNodes[0]?.__text ?? null;
-
-    // if (newTitleNode !== titleNode || isContentModified) {
-    //   setTitleNode(newTitleNode);
-    //   setIsContentModified(true);
-    // }
-
-    // // console.log("자동저장 ::: ", note.id, titleNode, JSON.stringify(editorState.toJSON()))
-    // // saveNote(note.id, titleNode, JSON.stringify(editorState.toJSON()))
-    // // 자동 저장 타이머 시작 또는 재설정
-    // if (autoSaveTimer) {
-    //   clearTimeout(autoSaveTimer);
-    // }
-
-    // const newAutoSaveTimer = setTimeout(() => {
-    //   // saveNote: (noteId, title, content)
-    //   console.log(
-    //     "자동저장 ::: ",
-    //     note.id,
-    //     titleNode,
-    //     JSON.stringify(editorState.toJSON()),
-    //   );
-    //   // saveNote(note.id, titleNode, JSON.stringify(editorState.toJSON()))
-    // }, 3000);
-
-    // setAutoSaveTimer(newAutoSaveTimer);
-  }
+  const onSave = () => {
+    saveNote(note.id, titleNode, editorState);
+  };
 
   const initialConfig = {
     namespace: "MyNoteEditor",
@@ -77,6 +44,22 @@ const Editor = ({ note }: { note: NoteType }) => {
       console.log(error);
     },
   };
+
+  // editor에 사용자의 입력이 멈추고 3초 후 isModified를 true로 설정
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setIsModified(true);
+    }, 3000);
+
+    return () => clearTimeout(timeoutId);
+  }, [editorState]);
+
+  // isModified가 true가 되면 auto save
+  useEffect(() => {
+    if (isModified) {
+      onSave();
+    }
+  }, [isModified]);
 
   return (
     <EditorWrapper>
@@ -87,19 +70,9 @@ const Editor = ({ note }: { note: NoteType }) => {
           ErrorBoundary={LexicalErrorBoundary}
         />
         <HistoryPlugin />
-        <OnChangePlugin onChange={onChange} />
         <InitPlugin note={note} />
+        <OnChangePlugin onChange={onChange} />
       </LexicalComposer>
-      {/* 저장하기 버튼 (임시) */}
-      <button
-        onClick={() => {
-          // saveNote: (noteId, title, content)
-          saveNote(note.id, titleNode, editorState);
-          console.log("저장하기 버튼 클릭 ::: ", titleNode, editorState);
-        }}
-      >
-        저장하기
-      </button>
     </EditorWrapper>
   );
 };

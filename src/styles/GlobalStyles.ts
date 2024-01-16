@@ -11,7 +11,6 @@ const GlobalStyles = createGlobalStyle`
     --color-white: #fff;
 
     --color-bg: #F4F4F4;
-    /* --color-bg: #F8F8F8; */
     --color-line: #ECECEC;
 
     --border-radius: 4px;
@@ -30,8 +29,7 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     color: var(--color-black);
-    /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Adjusted","Segoe UI","Liberation Sans", sans-serif; */
-    font-family: "Noto Sans", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Adjusted","Segoe UI","Liberation Sans", sans-serif;
     font-size: 1.6rem;
 
     width: 100%;
@@ -115,7 +113,6 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .note-item {
-    /* max-width: 1200px; */
     flex-grow: 8;
   }
 `;
